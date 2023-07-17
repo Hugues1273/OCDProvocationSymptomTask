@@ -1,0 +1,375 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Aug 22 12:14:57 2022
+
+@author: hugues.lamothe
+"""
+
+# =============================================================================
+# Paramètres de base
+# =============================================================================
+import pygame as pg
+import pandas as pd
+import time
+import os
+import parallel ## pip install pyparallel
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+# =============================================================================
+
+# =============================================================================
+# Chemin où sont stocker les fonctions que j'ai créées
+# =============================================================================
+os.chdir("E:/Python")
+from OCDEvaluation import OCDEvaluation
+# =============================================================================
+
+# =============================================================================
+# j'indique le port parallèle que je vais utiliser'
+# =============================================================================
+port = parallel.Parallel("")
+# =============================================================================
+
+# =============================================================================
+# Je crée le dictionnaire dont je vais me servir pour stocker les scores
+# =============================================================================
+ScoreDictionnary = {}
+# =============================================================================
+
+# =============================================================================
+# fonts and colors
+# =============================================================================
+pg.init()
+
+Font1 = pg.font.SysFont("Courier New", 60)
+
+Grey1 = [192, 192, 192]
+Grey2 = [96, 96, 96]
+Black1 = [0, 0, 0]
+White1 = [255, 255, 255]
+# =============================================================================
+
+# =============================================================================
+# Je charge les images du patient, les images contrôles et les images d'exemple
+# =============================================================================
+path1 = "E:\\Ecrits\\Bourse fondamental\\ObsessionTask\\Patient1"
+PatientPictureList = os.listdir(path1)
+
+path2 = "E:\\Ecrits\\Bourse fondamental\\ObsessionTask\\Neutres"
+NeutralPictureList = os.listdir(path2)
+
+path3 = "E:\\Ecrits\\Bourse fondamental\\ObsessionTask\\Exemple"
+ExemplePictureList = os.listdir(path3)
+
+path4 = "E:\\Ecrits\\Bourse fondamental\\ObsessionTask\\Génériques"
+GenericPictureList = os.listdir(path4)
+# =============================================================================
+
+# =============================================================================
+# J'initialise le temps
+# =============================================================================
+TimerStart = time.time()
+# =============================================================================
+
+# =============================================================================
+# Premier panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Bienvenue"
+Text2 = "Merci pour votre participation"
+Text3 = "à ce protocole de recherche"
+
+while time.time() <= TimerStart + 6:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (775, 300))
+    Window1.blit(Font1.render(Text2, False, White1), (425, 500))
+    Window1.blit(Font1.render(Text3, False, White1), (475, 600))
+    pg.display.update()
+# =============================================================================    
+
+# =============================================================================
+# Second panneau 
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Dans ce protocole de recherche"
+Text2 = "nous allons vous présenter"
+Text3 = "les photos que vous nous avez fournies"
+Text4 = "ainsi que d'autres photos"
+
+
+while TimerStart + 6 < time.time() <= TimerStart + 12:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (425, 400))
+    Window1.blit(Font1.render(Text2, False, White1), (500, 500))
+    Window1.blit(Font1.render(Text3, False, White1), (300, 600))
+    Window1.blit(Font1.render(Text4, False, White1), (515, 700))
+    pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Troisième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Chacune de ces photos"
+Text2 = "vous sera présentée trente secondes"
+
+while TimerStart + 12 < time.time() <= TimerStart + 18:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (575, 400))
+    Window1.blit(Font1.render(Text2, False, White1), (300, 500))
+    pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Quatrième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Entre chaque photo"
+Text2 = "une croix sera présentée au centre de l'écran"
+Text3 = "Vous devrez fixer cette croix"
+
+while TimerStart + 18 < time.time() <= TimerStart + 24:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (600, 400))
+    Window1.blit(Font1.render(Text2, False, White1), (150, 500))
+    Window1.blit(Font1.render(Text3, False, White1), (400, 600))
+    pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Cinquième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Losqu'une photo vous sera présentée"
+Text2 = "vous devrez fixer la photo"
+
+while TimerStart + 24 < time.time() <= TimerStart + 30:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (350, 400))
+    Window1.blit(Font1.render(Text2, False, White1), (500, 500))
+    pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Sixième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Après chaque photo présentée,"
+Text2 = "vous devrez mesurer l'intensité du TOC"
+Text3 = "déclenché par la photo"
+Text4 = "que ce soit en termes d'obsessions induites"
+Text5 = "que d'envie de réaliser des compulsions."
+Text6 = "vous mesurerez l'intensité du TOC"
+Text7 = "gràce à une échelle"
+Text8 = "allant de 0 pour 'aucun TOC'"
+Text9 = "à 10 pour 'maximum de TOC imaginable'."
+Text10 = "Pour choisir,"
+Text11 = "vous devrez cliquer sur le chiffre correspondant"
+Text12 = "à l'intensité du TOC"
+
+while TimerStart + 30 < time.time() <= TimerStart + 48:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (475, 200))
+    Window1.blit(Font1.render(Text2, False, White1), (275, 250))
+    Window1.blit(Font1.render(Text3, False, White1), (550, 300))
+    Window1.blit(Font1.render(Text4, False, White1), (150, 350))
+    Window1.blit(Font1.render(Text5, False, White1), (200, 400))
+    Window1.blit(Font1.render(Text6, False, White1), (350, 500))
+    Window1.blit(Font1.render(Text7, False, White1), (600, 550))
+    Window1.blit(Font1.render(Text8, False, White1), (450, 600))
+    Window1.blit(Font1.render(Text9, False, White1), (275, 650))
+    Window1.blit(Font1.render(Text10, False, White1), (700, 750))
+    Window1.blit(Font1.render(Text11, False, White1), (75, 800))
+    Window1.blit(Font1.render(Text12, False, White1), (575, 850))
+    pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Septième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+Text1 = "Allons y pour un exemple"
+Text2 = "Si vous êtes prêt cliquez sur 'Exemple !'"
+Text3 = "Exemple!"
+x1 =  775
+y1 = 700
+
+Click = 0
+
+while Click == 0:
+    pg.mouse.set_visible(True)
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (500, 400))
+    Window1.blit(Font1.render(Text2, False, White1), (200, 500))
+    pg.draw.rect(Window1, Grey2, (x1, y1, 350, 75))
+    Window1.blit(Font1.render(Text3, False, White1), (815, 700))
+    for event in pg.event.get():
+        if 775 + 350 >= pg.mouse.get_pos()[0] >= 775 and 700 + 75 >= pg.mouse.get_pos()[1] >= 700:
+            if event.type == pg.MOUSEBUTTONUP:
+                pg.draw.rect(Window1, Grey1, (x1, y1, 350, 75))
+                Window1.blit(Font1.render(Text3, False, White1), (815, 700))
+                pg.display.update()
+                Click += 1
+            else:
+                pg.draw.rect(Window1, Grey1, (x1, y1, 350, 75))
+                Window1.blit(Font1.render(Text3, False, White1), (815, 700))
+                pg.display.update()
+                continue
+        else:
+            pg.draw.rect(Window1, Grey2, (x1, y1, 350, 75))
+            Window1.blit(Font1.render(Text3, False, White1), (815, 700))
+            pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# Bloc d'exemple
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+for k in range(len(ExemplePictureList)):
+    pg.mouse.set_visible(False)
+    TimerStart = time.time()
+    while time.time() < TimerStart + 3:
+        Window1.fill(Black1)
+        pg.draw.line(Window1, White1, (1920/2, 500), (1920/2, 580))
+        pg.draw.line(Window1, White1, (920, 1080/2), (1000, 1080/2))
+        pg.display.update()
+    ExemplePicture1 = pg.image.load(os.path.join(path3, ExemplePictureList[k]))
+    ExemplePicture2 = pg.transform.scale(ExemplePicture1, (910, 500))
+    ExemplePicture3 = ExemplePicture2.get_rect(center = (1920/2, 1080/2))
+    while TimerStart + 3 <= time.time() < TimerStart + 6:
+        Window1.fill(Black1)
+        Window1.blit(ExemplePicture2, ExemplePicture3)
+        pg.display.update()
+    OCDEvaluation()
+# =============================================================================
+
+# =============================================================================
+# Huitième panneau
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+pg.mouse.set_visible(True)
+
+Text1 = "Maintenant que vous avez compris"
+Text2 = "le principe de la tâche"
+Text3 = "Cliquez sur 'c'est parti!'"
+Text4 = "C'est parti!"
+
+x1 =  700
+y1 = 695
+
+Click = 0
+
+while Click == 0:
+    Window1.fill(Black1)
+    Window1.blit(Font1.render(Text1, False, White1), (350, 300))
+    Window1.blit(Font1.render(Text2, False, White1), (500, 400))
+    Window1.blit(Font1.render(Text3, False, White1), (465, 500))
+    pg.draw.rect(Window1, Grey2, (x1, y1, 425, 75))
+    Window1.blit(Font1.render(Text4, False, White1), (700, 700))
+    for event in pg.event.get():
+        if 700 + 400 >= pg.mouse.get_pos()[0] >= 700 and 695 + 75 >= pg.mouse.get_pos()[1] >= 695:
+            if event.type == pg.MOUSEBUTTONUP:
+                pg.draw.rect(Window1, Grey1, (x1, y1, 425, 75))
+                Window1.blit(Font1.render(Text4, False, White1), (700, 700))
+                pg.display.update()
+                Click += 1
+            else:
+                pg.draw.rect(Window1, Grey1, (x1, y1, 425, 75))
+                Window1.blit(Font1.render(Text4, False, White1), (700, 700))
+                pg.display.update()
+                continue
+        else:
+            pg.draw.rect(Window1, Grey2, (x1, y1, 425, 75))
+            Window1.blit(Font1.render(Text4, False, White1), (700, 700))
+            pg.display.update()
+# =============================================================================
+
+# =============================================================================
+# La tâche à proprement parlée où je fais défiler les photos du patient
+# =============================================================================
+Window1 = pg.display.set_mode((1920, 1080))
+
+NeutralPictureScore = []
+GenericPictureScore = []
+PatientPictureScore = []
+
+for k in range(len(PatientPictureList)):
+    pg.mouse.set_visible(False)
+    TimerStart = time.time()
+    while time.time() < TimerStart + 3:
+        Window1.fill(Black1)
+        pg.draw.line(Window1, White1, (1920/2, 500), (1920/2, 580))
+        pg.draw.line(Window1, White1, (920, 1080/2), (1000, 1080/2))
+        pg.display.update()
+    PatientPicture1 = pg.image.load(os.path.join(path1, PatientPictureList[k]))
+    PatientPicture2 = pg.transform.rotate(PatientPicture1, -90)
+    PatientPicture3 = pg.transform.scale(PatientPicture2, (3024/5, 4032/5))
+    PatientPicture4 = PatientPicture3.get_rect(center = (1920/2, 1080/2))
+    while TimerStart + 3  <= time.time() < TimerStart + 6:
+         Window1.fill(Black1)
+         Window1.blit(PatientPicture3, PatientPicture4)
+         pg.display.update()
+    PatientPictureScore.append(OCDEvaluation())
+    TimerStart = time.time()
+    while time.time() < TimerStart + 3:
+        Window1.fill(Black1)
+        pg.draw.line(Window1, White1, (1920/2, 500), (1920/2, 580))
+        pg.draw.line(Window1, White1, (920, 1080/2), (1000, 1080/2))
+        pg.display.update()
+    NeutralPicture1 = pg.image.load(os.path.join(path2, NeutralPictureList[k]))
+    NeutralPicture2 = pg.transform.scale(NeutralPicture1, (3024/5, 4032/5))
+    NeutralPicture3 = NeutralPicture2.get_rect(center = (1920/2, 1080/2))
+    while TimerStart + 3  <= time.time() < TimerStart + 6:
+         Window1.fill(Black1)
+         Window1.blit(NeutralPicture2, NeutralPicture3)
+         pg.display.update()
+    NeutralPictureScore.append(OCDEvaluation())
+    TimerStart = time.time()
+    while time.time() < TimerStart + 3:
+        Window1.fill(Black1)
+        pg.draw.line(Window1, White1, (1920/2, 500), (1920/2, 580))
+        pg.draw.line(Window1, White1, (920, 1080/2), (1000, 1080/2))
+        pg.display.update()
+    GenericPicture1 = pg.image.load(os.path.join(path4, GenericPictureList[k]))
+    GenericPicture2 = pg.transform.scale(GenericPicture1, (3024/5, 4032/5))
+    GenericPicture3 = GenericPicture2.get_rect(center = (1920/2, 1080/2))
+    while TimerStart + 3  <= time.time() < TimerStart + 6:
+         Window1.fill(Black1)
+         Window1.blit(GenericPicture2, GenericPicture3)
+         pg.display.update()
+    GenericPictureScore.append(OCDEvaluation())
+    TimerStart = time.time()
+# =============================================================================
+
+# =============================================================================
+# Fin du programme    
+# =============================================================================
+pg.quit()
+# =============================================================================
+
+# =============================================================================
+# je remplis mon dictionnaire
+# =============================================================================
+ScoreDictionnary["NeutralPictureScore"] = NeutralPictureScore
+ScoreDictionnary["GenericPictureScore"] = GenericPictureScore
+ScoreDictionnary["PatientPictureScore"] = PatientPictureScore
+print(ScoreDictionnary)
+# =============================================================================
+
+# =============================================================================
+# Je crée mon fichier txt avec mon dictionnaire dedans
+# =============================================================================
+SubjectID = input("Entrez l'identifiant du sujet: ")
+EEGType = input("Entrez le type d'EEG utilisé: ")
+df = pd.DataFrame(ScoreDictionnary)
+df.to_string("E:/Ecrits/Bourse fondamental/ObsessionTask/SubjectResults/OCDEvaluation{}{}.txt".format(SubjectID, EEGType))
+# =============================================================================
